@@ -7,7 +7,16 @@ cd runaway-regex-test
 npm install
 ```
 
+* `dtA` shows time needed by JavaScript `RegExp`s (NodeJS v12.2.0)
+* `dtB` shows time needed by [`re2`](https://github.com/uhop/node-re2/)
+* third column shows ratio; smaller is better.
+
+Turns out re2 is almost never better than regular [pun intended] RegExps, which is sad. In one particularly
+bad case—`catastrophic1 2148.328 7.519 0.004`—its gain is truly huge though.
+
+
 ```
+                                                                     dtA         dtB    dtB/dtA
 ➜  runaway-regex-test (master) node lib/main.js
 00:00 TEST  ▶  started:   'test'
 00:00 RUNAWAY-REGEX-TEST/MAIN  ⚙  µ34322 simple                    3.063     70.946     23.164
