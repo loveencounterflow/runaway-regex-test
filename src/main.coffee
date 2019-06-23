@@ -68,6 +68,7 @@ match_against_re2 = ( n, text, re ) ->
     ["#stampedashfisfiuhsdfkjskdfkjsf",true,null]
     ["aaaaaaaaay",true,null]
     ["aaaaaaaaaaaaa",true,null]
+    ["aaaaaaaaaaaaab",true,null]
     ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxy",true,null]
     ["xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxyxxxxxxxxxxxxxxxxxxxxxxxyxyxyyxyxyxyx",true,null]
     ]
@@ -82,6 +83,7 @@ match_against_re2 = ( n, text, re ) ->
     catastrophic2:  /(x+x+)+y/
     catastrophic3:  /(a+)+$/
     catastrophic4:  /(a|a)+$/
+    # catastrophic5:  /(.*){1,10}[bc]/ ### too bad, neverr finishes ###
   dtA_sum = 0
   dtB_sum = 0
   for [ probe, matcher, error, ] in probes_and_matchers
@@ -129,6 +131,7 @@ is_valid_Re2 = ( pattern_or_regex ) ->
     [[ 'x4', /(x+x+)+y/,], [false,true,], ]
     [[ 'x5', /(a+){10}/,], [false,true,], ]
     [[ 'x6', /(a+){10}y/,], [false,true,], ]
+    [[ 'x7', /(.*){1,320}[bc]/,], [false,true,], ]
     ]
   #.........................................................................................................
   for [ probe, matcher, error, ] in probes_and_matchers
@@ -148,8 +151,8 @@ is_valid_Re2 = ( pattern_or_regex ) ->
 
 ############################################################################################################
 unless module.parent?
-  # test @
-  test @[ "regex performance, runaway test" ]
+  test @
+  # test @[ "regex performance, runaway test" ]
   # test @[ "selector keypatterns" ]
   # test @[ "select 2" ]
   # x = BigInt '123456'
