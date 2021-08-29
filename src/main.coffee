@@ -18,10 +18,10 @@ echo                      = CND.echo.bind CND
 test                      = require 'guy-test'
 jr                        = JSON.stringify
 #...........................................................................................................
-PD                        = require 'pipedreams'
+# PD                        = require 'pipedreams'
 # { $, $async, }            = PD
 #...........................................................................................................
-sre_1                     = require 'safe-regex'
+# sre_1                     = require 'safe-regex'
 sre_2                     = require 'safe-regex2'
 Re2                       = require 're2'
 { to_width
@@ -76,9 +76,9 @@ match_against_re2 = ( n, text, re ) ->
   n         = 1e4
   patterns  =
     simple:         /[aeiou][^aeiou]/
-    datom:          PD._datom_keypattern
-    selector:       PD._selector_keypattern
-    tag:            PD._tag_pattern
+    # datom:          PD._datom_keypattern
+    # selector:       PD._selector_keypattern
+    # tag:            PD._tag_pattern
     catastrophic1:  /(a+){10}y/
     catastrophic2:  /(x+x+)+y/
     catastrophic3:  /(a+)+$/
@@ -122,9 +122,9 @@ is_valid_Re2 = ( pattern_or_regex ) ->
 @[ "basic" ] = ( T, done ) ->
   probes_and_matchers = [
     [[ 'simple',     /[aeiou][^aeiou]/],[true,true,],]
-    [[ 'PD/datom',      PD._datom_keypattern],[true,true,],]
-    [[ 'PD/selector',   PD._selector_keypattern],[true,true,],]
-    [[ 'PD/tag',        PD._tag_pattern],[true,true,],]
+    # [[ 'PD/datom',      PD._datom_keypattern],[true,true,],]
+    # [[ 'PD/selector',   PD._selector_keypattern],[true,true,],]
+    # [[ 'PD/tag',        PD._tag_pattern],[true,true,],]
     [[ 'x1', /(a+)+$/, ], [false,true,], ]
     [[ 'x2', /(beep|boop)*/,], [true,true,], ]
     [[ 'x3', /\blocation\s*:[^:\n]+\b(Oakland|San Francisco)\b/,], [true,true,], ]
@@ -138,7 +138,8 @@ is_valid_Re2 = ( pattern_or_regex ) ->
     await T.perform probe, matcher, error, -> return new Promise ( resolve, reject ) ->
       [ key, pattern, ] = probe
       # debug ( CND.truth sre_1 pattern ), ( CND.truth sre_2 pattern ), ( CND.truth is_valid_Re2 pattern ), key
-      is_safe = ( sre_1 pattern ) and ( sre_2 pattern )
+      # is_safe = ( sre_1 pattern ) and ( sre_2 pattern )
+      is_safe = !!( sre_2 pattern )
       is_re2  = ( is_valid_Re2 pattern )
       result  = [ is_safe, is_re2, ]
       resolve result
